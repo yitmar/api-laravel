@@ -11,14 +11,10 @@
 |
 */
 
-
-
     use App\PessoaFisica;
     use App\PessoaJuridico;
 
-
     use App\Http\Resources\Consulta;
-
 
     Route::get('/', function () {
         return view('welcome');
@@ -28,16 +24,23 @@
         return  (phpinfo());
     });
 
-
-    Route::get('/query', function () {
-        return view('query');
-    });
-
-    Route::post('/responder', function () {
-        return view('responder');
-    });
-
     Route::get('/query_api', function () {        
-        return  PessoaFisica::all();
+        return  PessoaFisica::find(2);
+    });
+ 
+    Route::get('/consulta_fisica', function () {        
+        return view('consulta_cpf');
+    });
+
+    Route::get('/consulta_juridica', function () {        
+        return view('consulta_cvp');
+    });
+
+    Route::get('/query_api_fisica/{cpf}', function ($request) {        
+        return  PessoaFisica::find(2);
+    });
+
+    Route::get('/query_api_jiridica/{cvp}', function ($request) {        
+        return PessoaFisica::find(2);
     });
  
