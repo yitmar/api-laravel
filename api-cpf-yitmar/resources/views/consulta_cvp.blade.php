@@ -85,8 +85,8 @@
                 </div>
 
                 <div class="links">
-                    <form action="" method="GET">
-                        <input type="text" name="category" required/>
+                    <form action="" method="GET"> 
+                        <input type="text" name="cpf" required/>
                         <button type="submit">enviar</button>
                     </form> 
                     <br>

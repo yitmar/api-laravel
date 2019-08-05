@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>consulta</title>
+        <title>api consulta</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,22 +81,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    consulta cpf
+                    datos
                 </div>
 
                 <div class="links">
-                    <form action="/a" method="ṔOST">
-                        <input type="text" name="cpf" required/>
-                        <button type="submit">enviar</button>         <!-- procurar -->
-
-                    </form> 
-                    <br>
-                    <button>
-                        <a href="{{ url ('/') }}">
-                            volver
-                        </a>
-                    </button>
-                </div>                                     
+                    <a href="{{ url('consulta_fisica') }}"></a>
+                    <a href="{{ url('consulta_juridica') }}">Pessoa Juridica</a>
+                </div>
             </div>
         </div>
     </body>
