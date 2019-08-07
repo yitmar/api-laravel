@@ -15,7 +15,7 @@ class CreateJuridicaTable extends Migration
     {
         Schema::create('juridica', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string ('cvp');
+            $table->string ('cnpj');
             $table->string('nome');
             $table->integer('idfisica');
             $table->timestamps();

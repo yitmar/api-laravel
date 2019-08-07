@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>api consulta</title>
+        <title>consulta</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -30,6 +30,8 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
+                text-transform: uppercase;
+
             }
 
             .position-ref {
@@ -65,19 +67,28 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-   
-            th, td {
-                padding: 10px;
-                }
-            table, th, td {
-                border: 1px solid black;
-                margin: 10px;
-            }
-            table{
-                margin-bottom: 50px;
-                
-            }
+            
+            
         </style>
+
+        <script>
+            function mascara(i)
+            {
+   
+                var v = i.value;
+                
+                if(isNaN(v[v.length-1]))
+                { // impede entrar outro caractere que não seja número
+                    i.value = v.substring(0, v.length-1);
+                    return;
+                }
+                
+                i.setAttribute("maxlength", "14");
+                if (v.length == 3 || v.length == 7) i.value += ".";
+                if (v.length == 11) i.value += "-";
+
+            }
+        </script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -97,37 +108,31 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    dados
+                    consulta cpf
                 </div>
-                <div>
-                    <table class="table table-striped table-bordered scrolling-dataTable">
-                        <thead>
-                            <tr>
-                                <th>nome</th>
-                                <th>cpf</th>
-                            </tr>
-                        </thead>
-                        <tbody>      
-                            @if (count($result) === 0)
-                             
-                                    <td> sem resultado </td>
-                              
-                            @else
-                                @foreach ($result as $resulta)
-                                    <tr>
-                                        <td>{{ $resulta->nome }}</td>
-                                        <td>{{ $resulta->cpf }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif                        
-                        </tbody>
-                    </table>
-                </div>
-                <button>
-                    <a href="{{ url ('/') }}">
-                        volver
-                    </a>
-                </button>
+
+                <div class="links">
+                    <form action="/buscar_fisica_2" method="GET">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <input oninput="mascara(this)"  type="text" name="cpf" />
+                        <button type="submit">procurar</button> 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul style="color:#FF0000";>
+                                    @foreach ($errors->all() as $error)
+                                        <li style="color:#FF0000";>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif        <!-- procurar -->
+                    </form> 
+                    <br>
+                    <button>
+                        <a href="{{ url ('/') }}">
+                            volver
+                        </a>
+                    </button>
+                </div>                                     
             </div>
         </div>
     </body>

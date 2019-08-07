@@ -8,10 +8,7 @@ class PessoaJuridico extends Model
 {
     protected $table = 'juridica';
 
-    protected $fillable = ['id', 'nome', 'cvp'];
+    protected $fillable = ['id', 'nome', 'required'];
 
-    public function scopeHasLimit($query)
-    {
-        return $query->where('limit', '>', 0);
-    }
+    
 }

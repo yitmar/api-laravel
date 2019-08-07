@@ -78,6 +78,7 @@
                 
             }
         </style>
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -97,13 +98,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    dados
+                    datos
                 </div>
                 <div>
                     <table class="table table-striped table-bordered scrolling-dataTable">
                         <thead>
                             <tr>
-                                <th>nome</th>
+                                <th>nombe</th>
                                 <th>cpf</th>
                             </tr>
                         </thead>

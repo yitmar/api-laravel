@@ -18,6 +18,8 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+                text-transform: uppercase;
+
             }
 
             .full-height {
@@ -28,6 +30,8 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
+                text-transform: uppercase;
+
             }
 
             .position-ref {
@@ -46,6 +50,8 @@
 
             .title {
                 font-size: 84px;
+                text-transform: uppercase;
+
             }
 
             .links > a {
@@ -61,6 +67,8 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+           
+            
         </style>
     </head>
     <body>
@@ -85,10 +93,19 @@
                 </div>
 
                 <div class="links">
-                    <form action="/a" method="ṔOST">
-                        <input type="text" name="cpf" required/>
-                        <button type="submit">enviar</button>         <!-- procurar -->
-
+                    <form action="/buscar_fisica" method="GET">
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <input type="text" name="cpf" />
+                        <button type="submit">procurar</button> 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul style="color:#FF0000";>
+                                    @foreach ($errors->all() as $error)
+                                        <li style="color:#FF0000";>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif        <!-- procurar -->
                     </form> 
                     <br>
                     <button>

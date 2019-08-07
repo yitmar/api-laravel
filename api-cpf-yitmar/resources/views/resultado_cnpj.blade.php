@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
         <title>api consulta</title>
 
         <!-- Fonts -->
@@ -18,8 +18,6 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
-                text-transform: uppercase;
-
             }
 
             .full-height {
@@ -64,8 +62,19 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+                text-transform: uppercase;
+
             }
-   
+            th {
+                margin:50px;
+                text-transform: uppercase;
+
+            }
+            tr {
+                margin:50px;
+                text-transform: uppercase;
+
+            }
             th, td {
                 padding: 10px;
                 }
@@ -103,23 +112,29 @@
                     <table class="table table-striped table-bordered scrolling-dataTable">
                         <thead>
                             <tr>
-                                <th>nome</th>
+                                <th>nome juridico</th>
+                                <th>cnpj</th>
+                                <th>pessoa fisica</th>
                                 <th>cpf</th>
                             </tr>
                         </thead>
-                        <tbody>      
-                            @if (count($result) === 0)
-                             
-                                    <td> sem resultado </td>
+                        <tbody>
+                        @if (count($result) === 0)
+                            
+                        
+                                <td> sem resultado </td>
+                        
+                        @else
+
+                            @foreach ($result as $resulta)
                               
-                            @else
-                                @foreach ($result as $resulta)
-                                    <tr>
-                                        <td>{{ $resulta->nome }}</td>
-                                        <td>{{ $resulta->cpf }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif                        
+                                    <td>{{ $resulta->nome }}</td>
+                                    <td>{{ $resulta->cnpj }}</td>
+                                    <td>{{ $resulta->nome_fisico }}</td>
+                                    <td>{{ $resulta->cpf }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

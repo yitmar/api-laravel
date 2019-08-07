@@ -78,6 +78,7 @@
                 
             }
         </style>
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -97,29 +98,19 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    dados
+                foi cadastrado seu cpf e
                 </div>
                 <div>
                     <table class="table table-striped table-bordered scrolling-dataTable">
                         <thead>
                             <tr>
-                                <th>nome</th>
                                 <th>cpf</th>
                             </tr>
                         </thead>
                         <tbody>      
-                            @if (count($result) === 0)
-                             
-                                    <td> sem resultado </td>
-                              
-                            @else
-                                @foreach ($result as $resulta)
-                                    <tr>
-                                        <td>{{ $resulta->nome }}</td>
-                                        <td>{{ $resulta->cpf }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif                        
+                            <tr>
+                                <td>{{ $cpf_completo }}</td>
+                            </tr>                    
                         </tbody>
                     </table>
                 </div>

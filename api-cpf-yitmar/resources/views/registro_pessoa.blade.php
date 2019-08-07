@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>api consulta</title>
-
+        <title>consulta</title>
+      
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -30,20 +30,28 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
+                text-transform: uppercase;
+
             }
 
             .position-ref {
                 position: relative;
+                text-transform: uppercase;
+
             }
 
             .top-right {
                 position: absolute;
                 right: 10px;
                 top: 18px;
+                text-transform: uppercase;
+
             }
 
             .content {
                 text-align: center;
+                text-transform: uppercase;
+
             }
 
             .title {
@@ -60,22 +68,11 @@
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                
             }
 
             .m-b-md {
                 margin-bottom: 30px;
-            }
-   
-            th, td {
-                padding: 10px;
-                }
-            table, th, td {
-                border: 1px solid black;
-                margin: 10px;
-            }
-            table{
-                margin-bottom: 50px;
-                
             }
         </style>
     </head>
@@ -97,37 +94,34 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    dados
+                    CADASTRAR PESSOA FÍSICA
                 </div>
-                <div>
-                    <table class="table table-striped table-bordered scrolling-dataTable">
-                        <thead>
-                            <tr>
-                                <th>nome</th>
-                                <th>cpf</th>
-                            </tr>
-                        </thead>
-                        <tbody>      
-                            @if (count($result) === 0)
-                             
-                                    <td> sem resultado </td>
-                              
-                            @else
-                                @foreach ($result as $resulta)
-                                    <tr>
-                                        <td>{{ $resulta->nome }}</td>
-                                        <td>{{ $resulta->cpf }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif                        
-                        </tbody>
-                    </table>
-                </div>
-                <button>
-                    <a href="{{ url ('/') }}">
-                        volver
-                    </a>
-                </button>
+
+                <div class="links">
+                    <form action="/save_fisica" method="POST">     
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <label for=""> nome </label>
+                        <input type="text" name="nome" />
+                        <label for=""> cpf </label>
+                        <input type="text" name="cpf" />
+                        <button type="submit">salvar</button> 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul >
+                                    @foreach ($errors->all() as $error)
+                                        <li style="color:red";>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif  
+                    </form> 
+                    <br>
+                    <button>
+                        <a href="{{ url ('/') }}">
+                            volver
+                        </a>
+                    </button>
+                </div>                                     
             </div>
         </div>
     </body>

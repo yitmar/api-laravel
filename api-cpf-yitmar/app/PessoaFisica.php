@@ -15,8 +15,5 @@ class PessoaFisica extends Model
     // {
     //     return $this->hasMany('App\PessoaFisica');
     // }
-    public function scopeHasLimit($query)
-    {
-        return $query->where('limit', '>', 0);
-    }
+   
 }

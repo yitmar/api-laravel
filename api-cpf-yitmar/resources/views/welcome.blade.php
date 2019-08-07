@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
         <title>api consulta</title>
 
         <!-- Fonts -->
@@ -18,6 +18,8 @@
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
+                text-transform: uppercase;
+
             }
 
             .full-height {
@@ -46,6 +48,8 @@
 
             .title {
                 font-size: 84px;
+                text-transform: uppercase;
+
             }
 
             .links > a {
@@ -65,21 +69,18 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
 
             <div class="content">
+            <div class="col-md-6">
+                <div class="title m-b-md">
+                    cadastrar
+                </div>
+                <div class="links">
+                    <a href="{{ url('registro_pessoa') }}">Pessoa Fisica</a>
+                    <a href="{{ url('registro_juridica') }}">Pessoa Juridica</a>
+                </div>
+            </div>
+            <div class="col-md-6">   
                 <div class="title m-b-md">
                     consulta
                 </div>
@@ -88,6 +89,7 @@
                     <a href="{{ url('consulta_fisica') }}">Pessoa Fisica</a>
                     <a href="{{ url('consulta_juridica') }}">Pessoa Juridica</a>
                 </div>
+            </div>
             </div>
         </div>
     </body>
