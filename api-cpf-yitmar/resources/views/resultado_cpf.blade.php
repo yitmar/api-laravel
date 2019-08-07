@@ -100,6 +100,7 @@
                     dados
                 </div>
                 <div>
+                @if (isset($result))
                     <table class="table table-striped table-bordered scrolling-dataTable">
                         <thead>
                             <tr>
@@ -122,6 +123,20 @@
                             @endif                        
                         </tbody>
                     </table>
+                @else
+                    <table class="table table-striped table-bordered scrolling-dataTable">
+                        <thead>
+                            <tr>
+                                <th>CPF</th>
+                            </tr>
+                        </thead>
+                        <tbody>      
+                            <tr>
+                                <td>{{ $error }}</td>
+                            </tr>                    
+                        </tbody>
+                    </table>
+                    @endif
                 </div>
                 <button>
                     <a href="{{ url ('/') }}">

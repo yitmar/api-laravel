@@ -16,17 +16,58 @@ class pessoaFisica extends Controller
             'cpf' => 'required |min:11| max:11| regex:/^[0-9]{11}/' 
         
         ]);
-   
-   
-        $cpf=$request['cpf'];
-        // Perform the query using Query Builder
-        $result = DB::table('fisica')
-            ->select( 'cpf','nome')
-            ->where('cpf', '=', $cpf)
-            ->get();
 
-        return view ('resultado_cpf', ['result' => $result]);
-        // return $result;
+        $cpf=$request['cpf'];
+
+        $a=array(10,9,8,7,6,5,4,3,2);
+        $b=array(11,10,9,8,7,6,5,4,3,2);
+        $c=$array  = array_map('intval', str_split($cpf));
+        $suma=0;
+        $d=array();
+
+        for ($i = 0; $i <9; $i++) {
+            $suma_1=$a[$i] * $c[$i];
+            $suma=$suma_1+$suma;
+        };
+        $residuo=$suma%11;
+        $dijo=11-$residuo;
+        if ($dijo==10){
+            $dijo=0;
+        }        
+        $suma=0;
+        for ($i = 0; $i <10; $i++) {
+            if ($i==9) {
+                $suma_1=$b[$i] * $dijo;
+                $suma=$suma_1+$suma;
+            }
+            else{
+                $suma_1=$b[$i] * $c[$i];
+                $suma=$suma_1+$suma;
+            }
+        };
+        $residuo=$suma%11;
+        $dijo_2=11-$residuo;
+        if ($dijo_2==10){
+            $dijo=0;
+        }
+        $cpf_completo = substr($cpf,0,-2).$dijo.$dijo_2;
+
+        if ($cpf==$cpf_completo){
+   
+            // Perform the query using Query Builder
+            $result = DB::table('fisica')
+                ->select( 'cpf','nome')
+                ->where('cpf', '=', $cpf)
+                ->get();
+            return view ('resultado_cpf', ['result' => $result]);
+        }
+    
+            
+        else{
+            $error='CPF inválido';
+            return view ('resultado_cpf',['error' => $error]);
+        }   
+        
     }
 
     public function search_efecto(Request $request) {
@@ -49,6 +90,7 @@ class pessoaFisica extends Controller
             ->get();
 
         return view ('resultado_cnpj', ['result' => $result]);
+
     }
 
     public function search_api(Request $request) {
@@ -81,7 +123,7 @@ class pessoaFisica extends Controller
        
         $request->validate([
 
-            'cpf' => 'required |min:9| max:9| regex:/^[0-9]{9}/',
+            'cpf' => 'required |min:11| max:11| regex:/^[0-9]{11}/',
             'nome'=> 'required'
         ]);
         $cpf=$request['cpf'];
@@ -109,14 +151,11 @@ class pessoaFisica extends Controller
             if ($i==9) {
                 $suma_1=$b[$i] * $dijo;
                 $suma=$suma_1+$suma;
-         
             }
             else{
                 $suma_1=$b[$i] * $c[$i];
                 $suma=$suma_1+$suma;
-
             }
-            
         };
 
         $residuo=$suma%11;
@@ -126,24 +165,33 @@ class pessoaFisica extends Controller
             $dijo=0;
         }
         
-        $cpf_completo= '';
-        foreach ($c as $stringArray)
-        {
-          $cpf_completo = $cpf_completo.$stringArray;
+        $cpf_completo = substr($cpf,0,-2).$dijo.$dijo_2;
+        if ($cpf==$cpf_completo){
+            $result = DB::table('fisica')
+            ->select( 'id' )
+            ->where('cpf', '=', $cpf)
+            ->get();
+
+            
+            if (count($result)===0) {
+                $nome=$request['nome'];
+            
+                $result = DB::table('fisica')
+                ->insert( 
+                    ['cpf'=>$cpf_completo, 'nome'=>$nome]
+                );
+                return view ('resgritro_cpf',['cpf_completo' => $cpf_completo]);
+            } 
+            else {
+                $error='cpf já cadastrado';
+                return view ('resgritro_cpf',['cpf_completo' => $error]);
+                
+            }    
         }
-        $cpf_completo = $cpf_completo.$dijo;
-        $cpf_completo = $cpf_completo.$dijo_2;
-
-        $nome=$request['nome'];
-        
-        $result = DB::table('fisica')
-        ->insert( 
-            ['cpf'=>$cpf_completo, 'nome'=>$nome]
-        );
-        return view ('resgritro_cpf',['cpf_completo' => $cpf_completo]);
-
-    }
-   
-    
+        else{
+            $error='CPF inválido';
+            return view ('resgritro_cpf',['cpf_completo' => $error]);
+        }   
+    }   
 }
 

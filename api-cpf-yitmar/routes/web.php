@@ -33,8 +33,8 @@
     });
 //post cadastro
 
-Route::post('/save_fisica','pessoaFisica@register');
-Route::post('/save_empresa', 'pessoaJuridica@register');
+    Route::post('/save_fisica','pessoaFisica@register');
+    Route::post('/save_empresa', 'pessoaJuridica@register');
 
 //cregistra
     Route::get('/registro_pessoa', function () {        
